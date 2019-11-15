@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+// 整体布局
+.wrapper{
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.el-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  flex-basis: auto;
+  box-sizing: border-box;
+  min-width: 0;
+  .is-vertical {
+    flex-direction: column;
+  }
+
+}
+//head布局
+.el-header {
+  padding: 0 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.header {
+  box-shadow: 0 1px 5px 0 rgba(48, 48, 48, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+// 中间布局
+.body {
+  height: calc(100vh - 80px);
+}
+// 中间布局 - 左边
+.aside {
+  background-color: #2B303B;
+  overflow: hidden;
+  box-shadow: 1px 0 5px 0 rgba(48, 48, 48, 0.5);
+}
+.el-aside {
+  overflow: auto;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.el-scrollbar {
+  height: calc(100vh - 60px);
+  .el-scrollbar__wrap{
+    overflow: scroll;
+    height: 100%;
+    overflow-x: hidden;
+  }
+}
+.el-main-my {
+  display: block;
+  flex: 1;
+  flex-basis: auto;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 0 !important;
+  background-color: #F0F2F5;
+  margin-left:2px;
+}
+.el-menu{
+  border-right: 0px !important;
+}
+//底部布局
+.el-footer {
+  padding: 0 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.footer {
+  display: flex;
+  color: #ff6c37;
+  align-items: center;
+  font-size: small;
+  border-top-width: 1px;
+  border-top-color: #c7c7c7;
+  border-top-style: solid;
+  background-color: #fafafa;
+}
+
+
+
+

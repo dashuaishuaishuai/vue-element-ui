@@ -1,0 +1,25 @@
+[
+  {
+    "name": "系统管理",
+    "icon": "el-icon-s-custom",
+    "key": "1",
+    "children": [
+      {
+        "name": "user",
+        "label": "用户管理",
+        "key": "user",
+        "icon": "el-icon-user",
+        "component":"user"
+      },
+      {
+        "name": "role",
+        "label": "角色管理",
+        "key": "role",
+        "icon": "el-icon-s-tools",
+        "component":"role"
+      }
+    ]
+  }
+
+
+]
