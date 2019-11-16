@@ -17,7 +17,6 @@ const index = new Router({
   mode: 'history',
   routes: [
     {path: '/', component: () => import('@/modules/layout/Layout')},
-    {path: '*', redirect: '/'}
   ]
 })
 

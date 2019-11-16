@@ -1,20 +1,32 @@
 const tagViews = {
   state: {
-    visitedViews: []
+    visitedViews: [],
+    activeTabName: ""
   },
   mutations: {
-    addTagView(state, view) {
-      if (state.visitedViews.some(v => v.path === view.path)) return
+    addTagView(state, tab) {
+      state.activeTabName = tab.label;
+      if (state.visitedViews.some(v => v.component === tab.component)) return;
       state.visitedViews.push({
-          name: view.name,
-          key: view.key,
-          component: view.component
+          key: tab.key,
+          label: tab.label,
+          component: tab.component,
+          param: tab.param
         }
       )
     },
-    delTagView(state, view) {
+    refresh(state, tab) {
       state.visitedViews.forEach((it, index) => {
-        if (it.path === view.path) state.visitedViews.splice(index, 1);
+        if (it.component === tab.component) state.visitedViews[index].key = state.visitedViews[index].key + Math.random();
+      });
+    },
+
+    delTagView(state) {
+      state.visitedViews.forEach((it, index) => {
+        if (it.label === state.activeTabName) {
+          state.visitedViews.splice(index,1);
+          state.activeTabName =state.visitedViews[state.visitedViews.length-1]?.label;
+        }
       });
     }
   },

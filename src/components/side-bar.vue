@@ -2,7 +2,7 @@
 <!-- 使用说明：<side-bar></side-bar> -->
 <template>
   <!-- 循环生成侧栏菜单 -->
-  <el-menu :router="true" mode="vertical" active-text-color="#FFFFF" background-color="#2B303B" text-color="hsla(0,0%,100%,.7)">
+  <el-menu  mode="vertical" active-text-color="#FFFFF" background-color="#2B303B" text-color="hsla(0,0%,100%,.7)">
     <menu-bar :menu="menu"></menu-bar>
   </el-menu>
 
@@ -19,7 +19,7 @@
     data() {
       return {
         userName: localStorage.userName || "游客",
-        menu: []
+        menu: [],
       };
     },
     computed: {},
@@ -30,7 +30,8 @@
       async getMenu() {
         let data = await get("/json/menu.json", "");
         this.menu = data.data;
-      }
+      },
+
     }
   };
 </script>

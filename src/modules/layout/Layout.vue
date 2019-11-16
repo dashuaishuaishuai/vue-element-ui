@@ -25,9 +25,7 @@
     components: {
       "side-bar": SideBar,
       "tag-bar":TabBag,
-
     },
-
   }
 </script>
 

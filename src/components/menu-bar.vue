@@ -4,23 +4,24 @@
       <el-submenu v-if="item.children && item.children.length>0" :key="item.key" :index="item.key">
         <template slot="title">
           <i :class="item.icon"></i>
-          <span>{{item.name}}</span>
+          <span>{{item.label}}</span>
         </template>
         <menu-bar :menu="item.children"></menu-bar>
       </el-submenu>
       <el-menu-item v-if="!item.children || item.children.length===0"
                     :key="item.key"
                     :index="item.key"
-                    @click="addTagView(item)">
+                    @click="openMenu(item)">
         <i :class="item.icon"></i>
-        <span slot="title">{{item.key}}</span>
+        <span slot="title">{{item.label}}</span>
       </el-menu-item>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
+  import {mapMutations} from 'vuex'
+
   export default {
     name: "menu-bar",
     props: {
@@ -35,6 +36,9 @@
       ...mapMutations([
         'addTagView',
       ]),
+      openMenu(item) {
+        this.addTagView(item)
+      }
     }
   }
 </script>

@@ -7,11 +7,13 @@ import VueAxios from 'vue-axios'
 import router from './router'
 import store from './store'
 import tabPlugin from './plugins/tabs/tab-plugin'
+import Bus from './plugins/bus'
 
 Vue.config.productionTip = false
 
 Vue.use(tabPlugin);
 Vue.use(ElementUI);
+Vue.use(Bus);
 Vue.use(VueAxios, axios)
 
 new Vue({

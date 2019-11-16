@@ -1,15 +1,30 @@
 <template>
-  <el-tabs type="border-card" closable>
+  <el-tabs type="border-card" closable v-model="getActiveTabName"  @tab-remove="delTagView">
     <el-tab-pane
-        v-for="(item) in tabs"
+        v-for="(item) in getTabs"
         :key="item.key"
-        :label="item.label"
-        :name="item.name"
+        :name="item.label"
     >
-      <el-button @click="refresh(item.name)">刷新</el-button>
+      <template slot="label">
+        <el-popover
+            v-model="item.contextmenu"
+            placement="right-start"
+            trigger="manual">
+          <div @click="refresh(item)" style="width: 100px !important;">
+            <i class="el-icon-refresh"></i><span>刷新页面</span>
+          </div>
+          <span slot="reference"
+                @contextmenu.prevent="item.contextmenu=true"
+                @blur="item.contextmenu=false"
+               >
+                {{item.label}}
+              </span>
+        </el-popover>
+      </template>
       <component
-          v-bind:is="item.component"
-          class="tab"
+          v-bind:is="item.
+          component"
+          class="tab" :tab="item"
       ></component>
     </el-tab-pane>
   </el-tabs>
@@ -19,47 +34,52 @@
 <script>
   import User from "@/modules/user"
   import Role from "@/modules/role"
-
-  let i=0;
+  import {mapMutations} from 'vuex'
   export default {
     name: "tag-bar",
-    components:{
-      "user":User,
-      "role":Role,
+    components: {
+      "user": User,
+      "role": Role,
     },
-    created(){
+    created() {
 
     },
     data() {
       return {
         currentTab: "home",
-        tabs: [
-          {key: 'user', name: 'user', component: 'user', label: '用户管理'},
-          {key: 'role', name: 'role', component: 'role', label: '角色管理'}
-        ]
+        tabs: [],
+        isShow:false
       }
     },
     methods: {
-      refresh(name) {
-        console.log(name);
-        const component = this.tabs.find(c => c.name === name);
-        const label = component.label
-        const newTab = {
-          key: `${component.name}_${++i}`,
-          name: component.name,
-          label,
-          component: component.component,
-        };
-        if (this.tabs.find(t => t.label === label)) {
-          this.tabs = this.tabs.map(oldTab => oldTab.label === label ? newTab : oldTab)
+      ...mapMutations([
+        'addTagView',
+        'refresh',
+        'delTagView',
+      ]),
+    },
+    computed: {
+      getTabs: {
+        set(val) {
+          console.log(val);
+        },
+        get() {
+          return this.$store.state.tagViews.visitedViews;
         }
-        console.log(this.tabs)
+      },
+      getActiveTabName: {
+        get() {
+          return this.$store.state.tagViews.activeTabName;
+        },
+        set(val) {
+          console.log(val);
+        },
       }
     }
 
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>
